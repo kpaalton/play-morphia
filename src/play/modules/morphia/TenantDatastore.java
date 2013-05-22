@@ -55,7 +55,7 @@ public class TenantDatastore extends DatastoreImpl {
 
     @Override
     public DBCollection getCollection(Class clazz) {
-        if (!isMultitenantMode() || excludedClasses.contains(clazz.getName())) {
+        if (!isMultitenantMode() || excludedClasses.contains(clazz.getName()) || clazz.isAnnotationPresent(NonTenant.class)) {
             return super.getCollection(clazz);
         }
 
